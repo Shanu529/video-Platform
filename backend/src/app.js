@@ -18,6 +18,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoute)
 
-app.use("/api/food",  foodRoutes )
+app.use("/api/food", foodRoutes )
 
 export default app;

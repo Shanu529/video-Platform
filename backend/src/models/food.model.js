@@ -3,44 +3,44 @@
 
 import mongoose from "mongoose";
 
-const  foodSchema = mongoose.Schema({
-    name:{
+const foodSchema = mongoose.Schema({
+    name: {
         type: String,
         required: true,
-        
+
     },
 
-    video:{
-          type: String,
+    video: {
+        type: String,
         required: true,
     },
 
-    description:{
+    description: {
         type: String,
-        
+
 
     },
 
-    foodPartner:{
+    foodPartner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"foodPartner",
+        ref: "foodPartner",
     },
 
-    likeCount:{
+    likeCount: {
 
         type: Number,
-       default:0
+        default: 0
     },
 
-   saveCount:{
-        type:Number,
-        default:0
+    saveCount: {
+        type: Number,
+        default: 0
     }
 
 
 })
 
 
-const foodModel = mongoose.model("food",foodSchema );
+const foodModel = mongoose.model("food", foodSchema);
 
 export default foodModel;
