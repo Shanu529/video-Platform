@@ -15,6 +15,9 @@ export const registerUser = async (req, res) => {
 
     const { fullname, email, password } = req.body;
 
+    console.log("here is req, in backend ",req.body);
+    
+
     try {
         const isUserAlreadyExists = await usermodel.findOne({
             email

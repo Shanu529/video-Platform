@@ -39,6 +39,8 @@ export const authFoodPartnerMiddlerware = async (req, res, next) => {
 
 export const authUserMiddlerware = async (req, res, next) => {
 
+    console.log(",here id middlerware");
+    
     const token = req.cookies.token;
 
     if (!token) {
