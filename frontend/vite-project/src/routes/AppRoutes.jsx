@@ -27,6 +27,7 @@ function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/create-food" element={<CreateFood />} />
           <Route path="/food-partner/:id" element={<Profile />} />
+              {/* <Route path="/create-food" element={<CreateFood />} /> */}
         </Routes>
       </Router>
     </>

@@ -9,6 +9,8 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [following, setFollowing] = useState(false);
 
+  console.log("here is id using in profile ", id);
+  
   useEffect(() => {
     const getProfileData = async () => {
       try {
@@ -45,6 +47,8 @@ function Profile() {
 
   const username = profile.name || "Unknown";
   const bio = profile.description || "No bio available";
+  // console.log("here is profile ",profile.foodItems.[0]description);
+  
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -93,7 +97,7 @@ function Profile() {
       </div>
 
       {/* Videos Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-6">
+      <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-6">
         {videos.length === 0 ? (
           <div className="col-span-full text-center text-gray-500 py-8">
             No videos uploaded yet
@@ -102,7 +106,7 @@ function Profile() {
           videos.map((v) => (
             <div
               key={v._id}
-              className="relative w-full aspect-square bg-gray-100 overflow-hidden group"
+              className="relative w-full h-[20vh] aspect-square bg-gray-100 overflow-hidden group"
             >
               {v.video ? (
                 <video

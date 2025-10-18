@@ -5,7 +5,7 @@ import usermodel from "../models/user.model.js";
 import jwt, { decode } from "jsonwebtoken";
 
 export const authFoodPartnerMiddlerware = async (req, res, next) => {
-
+    console.log("here  is req ====", req);
 
     try {
         const token = req.cookies.token;
@@ -40,7 +40,7 @@ export const authFoodPartnerMiddlerware = async (req, res, next) => {
 export const authUserMiddlerware = async (req, res, next) => {
 
     console.log(",here id middlerware");
-    
+
     const token = req.cookies.token;
 
     if (!token) {

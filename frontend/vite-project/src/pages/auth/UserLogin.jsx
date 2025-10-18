@@ -25,7 +25,18 @@ function UserLogin() {
         }
       );
 
-      navigate("/");
+
+
+      localStorage.setItem("token", Response.data.token);
+      localStorage.setItem("user", JSON.stringify(Response.data.user));
+
+      // console.log("local storages ",localStorage);
+    
+
+      toast.success("Login successful!");
+      navigate("/"); // or wherever
+
+      // navigate("/");
 
       console.log(Response.data);
       toast.success("Successfully Register", {

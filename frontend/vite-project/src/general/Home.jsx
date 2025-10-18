@@ -1,16 +1,28 @@
+
+
+
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 function Home() {
+
+  
   const [videos, setVideos] = useState([]);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    axios
+    const response = axios
       .get("http://localhost:5000/api/food", { withCredentials: true })
       .then((res) => setVideos(res.data.foodItems))
       .catch((err) => console.log("Axios error:", err));
   }, []);
+
+  const navigate = useNavigate();
+
+  const profileCreater = async (id) => {
+    navigate(`/food-partner/${id}`);
+  };
 
   useEffect(() => {
     if (!videos.length) return;
@@ -61,8 +73,11 @@ function Home() {
               preload="metadata"
             />
             <div className="absolute bottom-5 left-4 text-white">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-sm">
+              <div className="flex items-center gap-2 mb-2 cursor-pointer">
+                <div
+                  onClick={()=>profileCreater(item.foodPartner)}
+                  className="bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-sm"
+                >
                   {item.profileName?.charAt(0) || "P"}
                 </div>
                 <span className="font-semibold">
