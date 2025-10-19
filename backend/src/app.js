@@ -19,6 +19,10 @@ import cors from "cors"
 // app.use(cookieParser())
 
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 app.use(cors({
     origin:process.env.FRONTEND_URL, 
     credentials: true,
@@ -26,7 +30,7 @@ app.use(cors({
 );
 
 app.get("/", (req, res) => {
-    res.send("hello world")
+    res.send("hello world user")
 });
 
 app.use("/api/auth", authRoute)

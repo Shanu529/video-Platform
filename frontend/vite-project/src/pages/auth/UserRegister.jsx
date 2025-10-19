@@ -15,11 +15,12 @@ function UserRegister() {
     e.preventDefault();
 
     console.log("hwe is fullname",fullName);
-    
 
     try {
       const Response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/user/register`,
+       
+        
         {
           fullname: fullName,
           email: email,
