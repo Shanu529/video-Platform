@@ -4,10 +4,8 @@ import foodPartnerModel from "../models/foodPartnerModel.js"
 import usermodel from "../models/user.model.js";
 import jwt, { decode } from "jsonwebtoken";
 
-
-
 export const authFoodPartnerMiddlerware = async (req, res, next) => {
-    // console.log("here  is req ====", req);
+
 
     try {
         const token = req.cookies.token;
@@ -17,17 +15,9 @@ export const authFoodPartnerMiddlerware = async (req, res, next) => {
                 messsage: "Please Login First"
             })
         }
-
-
-        console.log("here is tokennnnnnnnnnnnnn", token);
-        // console.log("req, body from middlerwarerssssssssssssssssssss ", req.body);
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("decoded token:", decoded);
-
         const foodPartner = await foodPartnerModel.findById(decoded.id);
-        console.log("here is food partnnerrrrrrrrrrrrrrrrr", foodPartner);
         req.foodPartner = foodPartner;
-
         next();
 
     } catch (error) {
@@ -39,12 +29,10 @@ export const authFoodPartnerMiddlerware = async (req, res, next) => {
 
 export const authUserMiddlerware = async (req, res, next) => {
 
-    console.log(",here id middlerware");
+
 
     const token = req.cookies.token;
 
-    console.log("Cookies:", req.cookies);
-    console.log("Token:", token);
 
     if (!token) {
         return res.status(401).json({

@@ -20,7 +20,7 @@ import cors from "cors"
 
 
 app.use(cors({
-    origin: ["http://localhost:5173", "http://10.217.211.147:5173"], // <-- Note the square brackets for an array and the comma separation
+    origin: ["http://localhost:5173", "http://10.217.211.147:5173"], 
     credentials: true,
 })
 );

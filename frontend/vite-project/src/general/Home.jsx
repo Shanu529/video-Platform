@@ -6,6 +6,7 @@ import { FiHeart } from "react-icons/fi";
 import { FaCommentAlt } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
+import { IoLogIn } from "react-icons/io5";
 
 function Home() {
   const [videos, setVideos] = useState([]);
@@ -13,7 +14,10 @@ function Home() {
 
   useEffect(() => {
     const response = axios
-      .get("http://localhost:5000/api/food", { withCredentials: true })
+
+      .get(`${import.meta.env.VITE_BACKEND_URL}/food`, {
+        withCredentials: true,
+      })
       .then((res) => setVideos(res.data.foodItems))
       .catch((err) => console.log("Axios error:", err));
   }, []);
@@ -56,7 +60,8 @@ function Home() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/food/like",
+        // "http://localhost:5000/api/food/like"
+        `${import.meta.env.VITE_BACKEND_URL}/food/like`,
         { foodId: item._id },
         { withCredentials: true }
       );
@@ -85,11 +90,12 @@ function Home() {
     navigate("/user/login");
   };
 
-  const navigateFoodPartner= async () => {
-
+  const navigateFoodPartner = async () => {
     navigate("/food-partner/register");
-    
   };
+
+  const avatar =
+    "https://as2.ftcdn.net/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg";
 
   return (
     <>
@@ -125,12 +131,12 @@ function Home() {
                 />
                 <div className="absolute bottom-5 left-4 text-white">
                   <div className="flex items-center gap-2 mb-2 cursor-pointer">
-                    <div
-                      onClick={() => profileCreater(item.foodPartner)}
-                      className="bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center text-sm"
-                    >
-                      {item.profileName?.charAt(0) || "P"}
-                    </div>
+                    <img
+                      src={avatar}
+                      alt="Avatar"
+                      className="w-10 h-10 rounded-full object-cover "
+                    />
+
                     <span className="font-semibold">
                       {item.name || "profile_name"}
                     </span>
@@ -161,7 +167,21 @@ function Home() {
                     </div>
 
                     <div>
-                      <FaPlus onClick={navigateFoodPartner}  className=" h-12  w-12  pt-5 " />
+                      <FaPlus
+                        onClick={navigateFoodPartner}
+                        className=" h-12  w-12  pt-5 "
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute top-0 right-0 gap-5 text-white">
+                  <div className="flex flex-col gap-14">
+                    <div>
+                      <IoLogIn
+                        onClick={navigateFoodPartner}
+                        className=" h-14  w-14  pt-5 "
+                      />
                     </div>
                   </div>
                 </div>

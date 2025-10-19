@@ -9,8 +9,10 @@ dotenv.config();
 
 connectMongodb();
 
+const PORT = process.env.PORT
+
 console.log("database trying to connect");
 
-app.listen(5000, (req, res) => {
+app.listen(PORT, (req, res) => {
     console.log("server sucessfully run on port 5000");
 })

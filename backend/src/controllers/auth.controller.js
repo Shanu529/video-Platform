@@ -10,7 +10,6 @@ import jwt from 'jsonwebtoken';
 import pkg from "jsonwebtoken";
 const { sign } = pkg;
 
-
 export const registerUser = async (req, res) => {
 
     const { fullname, email, password } = req.body;

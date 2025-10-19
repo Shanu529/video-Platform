@@ -15,7 +15,8 @@ function UserLogin() {
 
     try {
       const Response = await axios.post(
-        "http://localhost:5000/api/auth/user/login",
+        `${import.meta.env.VITE_BACKEND_URL}/auth/user/login`,
+
         {
           email: email,
           password: password,
@@ -25,13 +26,10 @@ function UserLogin() {
         }
       );
 
-
-
       localStorage.setItem("token", Response.data.token);
       localStorage.setItem("user", JSON.stringify(Response.data.user));
 
       // console.log("local storages ",localStorage);
-    
 
       toast.success("Login successful!");
       navigate("/"); // or wherever

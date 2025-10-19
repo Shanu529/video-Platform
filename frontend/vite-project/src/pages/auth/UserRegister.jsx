@@ -19,7 +19,7 @@ function UserRegister() {
 
     try {
       const Response = await axios.post(
-        "http://localhost:5000/api/auth/user/register",
+        `${import.meta.env.VITE_BACKEND_URL}/auth/user/register`,
         {
           fullname: fullName,
           email: email,
