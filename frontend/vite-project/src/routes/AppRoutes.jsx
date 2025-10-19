@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "../general/Home";
@@ -12,6 +12,8 @@ import FoodPartnerLogin from "../pages/auth/FoodPartnerLogin";
 import Profile from "../pages/food-partner/profile";
 
 function AppRoutes() {
+
+  const [showLogin , setShowLogin] = useState();
   return (
     <>
       <Router>

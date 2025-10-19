@@ -4,8 +4,10 @@ import foodPartnerModel from "../models/foodPartnerModel.js"
 import usermodel from "../models/user.model.js";
 import jwt, { decode } from "jsonwebtoken";
 
+
+
 export const authFoodPartnerMiddlerware = async (req, res, next) => {
-    console.log("here  is req ====", req);
+    // console.log("here  is req ====", req);
 
     try {
         const token = req.cookies.token;
@@ -18,9 +20,7 @@ export const authFoodPartnerMiddlerware = async (req, res, next) => {
 
 
         console.log("here is tokennnnnnnnnnnnnn", token);
-
-
-        console.log("req, body from middlerwarerssssssssssssssssssss ", req.body);
+        // console.log("req, body from middlerwarerssssssssssssssssssss ", req.body);
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         console.log("decoded token:", decoded);
 
@@ -42,6 +42,9 @@ export const authUserMiddlerware = async (req, res, next) => {
     console.log(",here id middlerware");
 
     const token = req.cookies.token;
+
+    console.log("Cookies:", req.cookies);
+    console.log("Token:", token);
 
     if (!token) {
         return res.status(401).json({

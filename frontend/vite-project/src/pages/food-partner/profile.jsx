@@ -8,9 +8,8 @@ function Profile() {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [following, setFollowing] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState(null); // 👈 for fullscreen video
 
-  console.log("here is id using in profile ", id);
-  
   useEffect(() => {
     const getProfileData = async () => {
       try {
@@ -22,7 +21,6 @@ function Profile() {
           }
         );
         const data = res.data.foodPartner;
-
         setProfile(data || {});
         setVideos(Array.isArray(data.foodItems) ? data.foodItems : []);
       } catch (err) {
@@ -43,21 +41,19 @@ function Profile() {
   const avatar =
     profile.avatar ||
     profile.logo ||
-    "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=400&auto=format&fit=crop&q=60";
+    "https://as2.ftcdn.net/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg";
 
   const username = profile.name || "Unknown";
   const bio = profile.description || "No bio available";
-  // console.log("here is profile ",profile.foodItems.[0]description);
-  
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4 relative">
       {/* Profile Header */}
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 border-b pb-6">
         <img
           src={avatar}
           alt="Avatar"
-          className="w-36 h-36 rounded-full object-cover border-2 border-gray-300"
+          className="w-36 h-36 rounded-full object-cover "
         />
         <div className="flex-1 text-center md:text-left">
           <div className="flex flex-col md:flex-row md:items-center md:gap-4 mb-4">
@@ -106,7 +102,8 @@ function Profile() {
           videos.map((v) => (
             <div
               key={v._id}
-              className="relative w-full h-[20vh] aspect-square bg-gray-100 overflow-hidden group"
+              onClick={() => setSelectedVideo(v.video)} // 👈 open fullscreen
+              className="relative w-full h-[20vh] bg-gray-100 overflow-hidden group cursor-pointer"
             >
               {v.video ? (
                 <video
@@ -124,7 +121,7 @@ function Profile() {
                   className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
-                <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-gray-400">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                   No media
                 </div>
               )}
@@ -132,6 +129,28 @@ function Profile() {
           ))
         )}
       </div>
+
+      {/* 🔥 Fullscreen Video Modal */}
+      {selectedVideo && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          onClick={() => setSelectedVideo(null)} // click outside to close
+        >
+          <video
+            src={selectedVideo}
+            controls
+            autoPlay
+            className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-lg"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking video
+          />
+          <button
+            onClick={() => setSelectedVideo(null)}
+            className="absolute top-6 right-6 text-white text-3xl font-bold hover:text-gray-300"
+          >
+            &times;
+          </button>
+        </div>
+      )}
     </div>
   );
 }
