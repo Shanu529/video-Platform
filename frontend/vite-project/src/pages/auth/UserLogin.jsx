@@ -10,13 +10,14 @@ function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+   console.log("here is endpoint url", `${import.meta.env.VITE_BACKEND_URL}/auth/user/login` );
+
   const formHandler = async (e) => {
     e.preventDefault();
 
     try {
       const Response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/user/login`,
-
         {
           email: email,
           password: password,
@@ -33,7 +34,6 @@ function UserLogin() {
 
       toast.success("Login successful!");
       navigate("/"); // or wherever
-
       // navigate("/");
 
       console.log(Response.data);

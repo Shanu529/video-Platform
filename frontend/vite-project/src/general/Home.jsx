@@ -13,11 +13,23 @@ function Home() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const response = axios
+    const response = axios;
 
+    // .get(`${import.meta.env.VITE_BACKEND_URL}/food`, {
+    //   withCredentials: true,
+    // })
+
+    const token = localStorage.getItem("token");
+
+    axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/food`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
         withCredentials: true,
       })
+
       .then((res) => setVideos(res.data.foodItems))
       .catch((err) => console.log("Axios error:", err));
   }, []);
@@ -59,11 +71,17 @@ function Home() {
     console.log("here is itesm ", item._id);
 
     try {
+      const token = localStorage.getItem("token");
+
       const res = await axios.post(
-        // "http://localhost:5000/api/food/like"
         `${import.meta.env.VITE_BACKEND_URL}/food/like`,
-        { foodId: item._id },
-        { withCredentials: true }
+        { foodId: item._id }, // request body
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
       );
 
       if (res.data.message === "Food liked successfully") {
