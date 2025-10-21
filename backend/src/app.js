@@ -22,13 +22,25 @@ import cors from "cors"
 import dotenv from 'dotenv';
 dotenv.config();
 
+const allowedOrigins = [
+    "http://localhost:5173",  // local dev
+    "https://video-platform-8cg0mmtw8-shanu529s-projects.vercel.app"  // deployed frontend
+];
 
-app.use(cors({
-    origin:process.env.FRONTEND_URL, 
-    credentials: true,
-})
-);
+// Use environment variable if defined, else fallback to the allowed list
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin) || origin === process.env.FRONTEND_URL) {
+            callback(null, true);
+        } else {
+            console.log("❌ CORS blocked for:", origin);
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true, // if using cookies or JWTs
+};
 
+app.use(cors(corsOptions));
 app.get("/", (req, res) => {
     res.send("hello world user")
 });
