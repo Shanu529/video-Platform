@@ -38,11 +38,11 @@ function Home() {
 
   const profileCreater = async (id) => {
     navigate(`/food-partner/${id}`);
+    // 68f749eecfcdf3a555458d90
   };
 
   useEffect(() => {
     if (!videos.length) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -150,6 +150,7 @@ function Home() {
                 <div className="absolute bottom-5 left-4 text-white">
                   <div className="flex items-center gap-2 mb-2 cursor-pointer">
                     <img
+                      onClick={() => profileCreater(item.foodPartner)}
                       src={avatar}
                       alt="Avatar"
                       className="w-10 h-10 rounded-full object-cover "

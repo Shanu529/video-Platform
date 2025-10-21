@@ -20,6 +20,9 @@ function Profile() {
             withCredentials: true,
           }
         );
+
+        console.log(res, "here is response from food partner ");
+        
         const data = res.data.foodPartner;
         setProfile(data || {});
         setVideos(Array.isArray(data.foodItems) ? data.foodItems : []);
