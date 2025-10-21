@@ -5,8 +5,6 @@ import usermodel from "../models/user.model.js";
 import jwt, { decode } from "jsonwebtoken";
 
 export const authFoodPartnerMiddlerware = async (req, res, next) => {
-
-
     try {
         const token =
             req.cookies.token || req.headers.authorization?.split(" ")[1];

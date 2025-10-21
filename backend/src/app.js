@@ -24,7 +24,8 @@ dotenv.config();
 
 const allowedOrigins = [
     "http://localhost:5173",  // local dev
-    "https://video-platform-8cg0mmtw8-shanu529s-projects.vercel.app"  // deployed frontend
+    "https://video-platform-8cg0mmtw8-shanu529s-projects.vercel.app" ,
+    "https://video-platform-rose.vercel.app" // deployed frontend
 ];
 
 // Use environment variable if defined, else fallback to the allowed list
