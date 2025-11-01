@@ -1,6 +1,6 @@
-import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 
 import authRoute from "./routes/auth.routes.js";
@@ -15,26 +15,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ FIXED CORS CONFIG
+// ✅ ALLOWED ORIGINS
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://video-platform-client.vercel.app"
+  "https://video-platform-client.vercel.app",
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+// ✅ CORS Middleware (must be very early)
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
 
-// ✅ Handle preflight requests manually (for Vercel)
-app.options("*", cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
 
-// Routes
+  next();
+});
+
+// ✅ Routes
 app.get("/", (req, res) => {
   res.send("hello world user");
 });
