@@ -26,7 +26,7 @@ function CreateFood() {
 
     try {
       setLoading(true); // Start loading
-      const response = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/food`, formData, {
+      const response = await axios.post( `${import.meta.env.VITE_BACKEND_URL}/api/food`, formData, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",

@@ -22,7 +22,7 @@ function FoodPartnerRegister() {
     try {
       const Response = await axios.post(
         
-        `${import.meta.env.VITE_BACKEND_URL}/auth/food-partner/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/food-partner/register`,
         {
           name,
           contactName,

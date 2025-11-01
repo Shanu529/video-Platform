@@ -22,7 +22,7 @@ function Home() {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/food`, {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/food`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,7 +74,7 @@ function Home() {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/food/like`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/food/like`,
         { foodId: item._id }, // request body
         {
           headers: {

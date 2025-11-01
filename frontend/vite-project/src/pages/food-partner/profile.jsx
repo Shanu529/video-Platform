@@ -15,7 +15,7 @@ function Profile() {
       try {
         setLoading(true);
         const res = await axios.get(
-           `${import.meta.env.VITE_BACKEND_URL}/food-partner/${id}`,
+           `${import.meta.env.VITE_BACKEND_URL}/api/food-partner/${id}`,
           {
             withCredentials: true,
           }

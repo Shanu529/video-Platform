@@ -18,7 +18,7 @@ function UserRegister() {
 
     try {
       const Response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/user/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/user/register`,
 
         {
           fullname: fullName,
@@ -32,7 +32,7 @@ function UserRegister() {
       );
 
       console.log("here is rsponse ", Response);
-      console.log("here is endpoint",  `${import.meta.env.VITE_BACKEND_URL}/auth/user/register`,);
+      console.log("here is endpoint",  `${import.meta.env.VITE_BACKEND_URL}/api/auth/user/register`,);
       
       
 
